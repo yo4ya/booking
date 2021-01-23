@@ -13,7 +13,8 @@ class Schedule(models.Model):
     #nature_number = models.IntegerField('人数',validators=[MinValueValidator(1)], null=True)
     #tel_number_regex = RegexValidator(regex=r'^[0-9]+$', message = ("Tel Number must be entered in the format: '09012345678'. Up to 15 digits allowed."))
     #tel_number = models.CharField(validators=[tel_number_regex], max_length=15, verbose_name='電話番号')
-    tel = models.CharField('電話番号', max_length=15, null=True)
+    tel = models.CharField('電話番号', max_length=15)
+    #tel = models.CharField('電話番号', max_length=15, null=True)
     #staff = models.ForeignKey('Staff', verbose_name='スタッフ', on_delete=models.CASCADE)
 
     def __str__(self):
