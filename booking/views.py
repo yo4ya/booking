@@ -158,7 +158,9 @@ class UserDataCreate(generic.CreateView,Booking):
         return render(self.request, 'booking/user_data_input.html', {'form': form})
 
 def list(request):
-    return render(request, 'booking/list.html', {})
+    data = Schedule.objects.all()
+    params = {'message':'予約一覧', 'data':data}
+    return render(request, 'booking/list.html', params)
 
 def top(request):
     return render(request, 'booking/top.html', {})

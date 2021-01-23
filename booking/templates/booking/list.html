@@ -1,7 +1,23 @@
 {% extends 'booking/base.html' %}
 
 {% block content %}
-<h1>ちんぽくうや</h1>
-<a href="{% url 'booking:calendar' %}">戻る</a>
+<h1>予約一覧</h1>
+<a href="{% url 'booking:top' %}">戻る</a>
+<table class="table table-bordered text-center" style="table-layout: fixed;width: 100%" border="1">
+    <tr>
+        <th>日</th>
+        <th>名前</th>
+        <th>人数</th>
+        <th>電話番号</th>
+    </tr>
+    {% for inf in data %}
+    <tr>
+        <td>{{inf.start}}</td>
+        <td>{{inf.name}}</td>
+        <td>{{inf.number}}</td>
+        <td>{{inf.tel}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
