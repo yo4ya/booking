@@ -89,7 +89,7 @@ class Booking(generic.FormView):
         context['day'] = self.kwargs.get('day')
         context['hour'] = self.kwargs.get('hour')
         return context
-
+    
 
 class UserDataConfirm(generic.FormView):
     """ユーザー情報の確認
@@ -110,6 +110,14 @@ class UserDataConfirm(generic.FormView):
         hour = self.kwargs.get('hour')
         return render(self.request, 'booking/user_data_confirm.html', {'form': form, 'year':year, 'month':month, 'day':day, 'hour':hour})
 
+    def form_invalid(self, form):
+        year = self.kwargs.get('year')
+        month = self.kwargs.get('month')
+        day = self.kwargs.get('day')
+        hour = self.kwargs.get('hour')
+        return render(self.request, 'booking/user_data_input.html', {'form': form, 'year':year, 'month':month, 'day':day, 'hour':hour})
+
+"""
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         year = self.kwargs.get('year')
@@ -117,14 +125,12 @@ class UserDataConfirm(generic.FormView):
         day = self.kwargs.get('day')
         hour = self.kwargs.get('hour')
         return render(self.request, 'booking/user_data_confirm.html', {'year': 2021})
-
-
-    def form_invalid(self, form):
-        return render(self.request, 'booking/user_data_input.html', {'form': form})
+"""
+    
     
     
 
-class UserDataCreate(generic.CreateView,Booking):
+class UserDataCreate(generic.CreateView):
     """ユーザーデータの登録ビュー。ここ以外では、CreateViewを使わないでください"""
     form_class = UserCreateForm
 
@@ -151,7 +157,7 @@ class UserDataCreate(generic.CreateView,Booking):
         #return render('booking:calendar', year=year, month=month, day=day)
         #return redirect('booking:calendar', year=year, month=month, day=day)
     
-    success_url = reverse_lazy('booking:')
+    success_url = reverse_lazy('booking:calendar')
 
     def form_invalid(self, form):
         """基本的にはここに飛んでこないはずです。UserDataConfrimでバリデーションは済んでるため"""

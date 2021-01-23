@@ -2,7 +2,7 @@
 {% block content %}
 <form action="{% url 'booking:user_data_confirm' year month day hour%}" method="POST">
     {{ form.non_field_errors }}
-    <p>{{ view.kwargs.year }}年{{ view.kwargs.month }}月{{ view.kwargs.day }}日 {{ view.kwargs.hour }}時にご予約</p>
+    <p>{{ year }}年{{ month }}月{{ day }}日 {{ hour }}時にご予約</p>
     {% for field in form %}
     <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
