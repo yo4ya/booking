@@ -1,0 +1,16 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<form action="{% url 'booking:user_data_confirm' year month day hour%}" method="POST">
+    {{ form.non_field_errors }}
+    <p>{{ view.kwargs.year }}年{{ view.kwargs.month }}月{{ view.kwargs.day }}日 {{ view.kwargs.hour }}時にご予約</p>
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-lg">送信</button>
+</form>
+{% endblock %}
